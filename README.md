@@ -4,7 +4,7 @@ AI Project
 Instructions
 ------------
 To set this up, you'll need a virtualenv and pip.
-If you don't know how to do click (here)[http://dabapps.com/blog/introduction-to-pip-and-virtualenv-python/].
+If you don't know how to do that, read this: http://dabapps.com/blog/introduction-to-pip-and-virtualenv-python/
 After that, activate the virtualenv and run 
 
   `pip install -r requirements.txt`
