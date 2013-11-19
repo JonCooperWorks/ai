@@ -1,0 +1,33 @@
+%html
+  %head
+    %titlePresentation
+    %script(src="http://html5slides.googlecode.com/svn/trunk/slides.js")
+
+  %body(style="display: none")
+    %section.slides.layout-regular
+      %article  
+        %h1 Group 3 Artificial Intelligence Project
+
+      %form(action="#{}", method="POST")
+      -for question in questions
+        %article
+          %h1
+            ${question}
+
+          %btn 
+            Yes
+          %btn 
+            No
+            
+
+
+
+
+
+
+
+
+
+
+
+

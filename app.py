@@ -13,6 +13,9 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 def home():
   return render_template('home.haml')
 
+@app.route('/question/')
+def question():
+  return render_template('question.haml')
 
 if __name__ == '__main__':
   app.run(port=8004, debug=True)
