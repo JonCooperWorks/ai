@@ -24,32 +24,20 @@ hypothesis(patient, oldadulthydrocephalus) :-
 
 hypothesis(patient,measles) :-
     symptom(patient,fever), symptom(patient,cough),
-    symptom(patient,conjunctive), symptom(patient,runnynose),
+    symptom(patient,runnynose),
     symptom(patient,rash).
-
-hypothesis(patient,germanmeasles):-
-    symptom(patient,fever), symptom(patient,headache),
-    symptom(patient,runnynose),symptom(patient,rash).
 
 hypothesis(patient,flu) :-
     symptom(patient,fever), symptom(patient,headache),
     symptom(patient,bodyache), symptom(patient,chills),
-    symptom(patient,sorethrought), symptom(patient,cough),
-    symptom(patient,conjunctive), symptom(patient,conjunctive),
+    symptom(patient,sorethroat), symptom(patient,cough),
     symptom(patient,runnynose).
 
 hypothesis(patient,commoncold) :-
     symptom(patient,headache), symptom(patient,runnynose),
-    symptom(patient,snuzing), symptom(patient,chills),
-    symptom(patient,sorethrought).
-
-hypothesis(patient,mumps) :-
-    symptom(patient,fever), symptom(patient,swollenglands).
+    symptom(patient,sneezing), symptom(patient,chills),
+    symptom(patient,sorethroat).
 
 hypothesis(patient,chikenpox) :-
     symptom(patient,fever), symptom(patient,rash),
     symptom(patient,bodyache).
-
-hypothesis(patient,whooping-cough) :-
-    symptom(patient,runnynose), symptom(patient,snuzing),
-    symptom(patient,cough).
