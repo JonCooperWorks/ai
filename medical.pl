@@ -1,4 +1,3 @@
-
 hypothesis(patient, infanthydrocephalus) :-
     age_group(patient, infant),
     symptom(patient, sunseteyes), symptom(patient, seizures),
@@ -24,33 +23,33 @@ hypothesis(patient, oldadulthydrocephalus) :-
     symptom(patient, diffcultywalking), symptom(patient, poorcoordination).
 
 hypothesis(patient,measles) :-
-    symptom(Patient,fever), symptom(Patient,cough),
-    symptom(Patient,conjunctive), symptom(Patient,runnynose),
-    symptom(Patient,rash).
+    symptom(patient,fever), symptom(patient,cough),
+    symptom(patient,conjunctive), symptom(patient,runnynose),
+    symptom(patient,rash).
 
-hypothesis(Patient,germanmeasles):-
-    symptom(Patient,fever), symptom(Patient,headache),
-    symptom(Patient,runnynose),symptom(Patient,rash).
+hypothesis(patient,germanmeasles):-
+    symptom(patient,fever), symptom(patient,headache),
+    symptom(patient,runnynose),symptom(patient,rash).
 
-hypothesis(Patient,flu) :-
-    symptom(Patient,fever), symptom(Patient,headache),
-    symptom(Patient,bodyache), symptom(Patient,chills),
-    symptom(Patient,sorethrought), symptom(Patient,cough),
-    symptom(Patient,conjunctive), symptom(Patient,conjunctive),
-    symptom(Patient,runnynose).
+hypothesis(patient,flu) :-
+    symptom(patient,fever), symptom(patient,headache),
+    symptom(patient,bodyache), symptom(patient,chills),
+    symptom(patient,sorethrought), symptom(patient,cough),
+    symptom(patient,conjunctive), symptom(patient,conjunctive),
+    symptom(patient,runnynose).
 
-hypothesis(Patient,commoncold) :-
-    symptom(Patient,headache), symptom(Patient,runnynose),
-    symptom(Patient,snuzing), symptom(Patient,chills),
-    symptom(Patient,sorethrought).
+hypothesis(patient,commoncold) :-
+    symptom(patient,headache), symptom(patient,runnynose),
+    symptom(patient,snuzing), symptom(patient,chills),
+    symptom(patient,sorethrought).
 
-hypothesis(Patient,mumps) :-
-    symptom(Patient,fever), symptom(Patient,swallenglands).
+hypothesis(patient,mumps) :-
+    symptom(patient,fever), symptom(patient,swollenglands).
 
-hypothesis(Patient,chikenpox) :-
-    symptom(Patient,fever), symptom(Patient,rash),
-    symptom(Patient,bodyache).
+hypothesis(patient,chikenpox) :-
+    symptom(patient,fever), symptom(patient,rash),
+    symptom(patient,bodyache).
 
-hypothesis(Patient,whooping-cough) :-
-    symptom(Patient,runnynose), symptom(Patient,snuzing),
-    symptom(Patient,cough).
+hypothesis(patient,whooping-cough) :-
+    symptom(patient,runnynose), symptom(patient,snuzing),
+    symptom(patient,cough).

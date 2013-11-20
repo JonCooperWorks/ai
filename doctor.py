@@ -34,14 +34,17 @@ class Doctor(object):
 
     prolog = Prolog()
 
-    if age_group is not None:
-      prolog.assertz('age_group(patient,%s)' % age_group)
+    if age_group is None:
+      age_group = 'none'
+
+    patient = 'patient'
+    prolog.assertz('age_group(%s,%s)' % (patient, age_group))
 
     for symptom in symptoms:
-      prolog.assertz('symptom(patient,%s)' % symptom)
+      prolog.assertz('symptom(%s,%s)' % (patient, symptom))
 
     prolog.consult(self.prolog_file)
-    return list(prolog.query('hypothesis(patient,Diagnosis)'))
+    return list(prolog.query('hypothesis(%s,Diagnosis)' % patient))
 
   def diagnose_one(self, symptoms, age_group=None):
     """Convenience wrapper around diagnose that returns only one result.
@@ -55,13 +58,42 @@ class Doctor(object):
 
 
 if __name__ == '__main__':
-  """If we're running this directly, run the 'unit tests'.
-  """
+  """If we're running this directly, run the 'unit tests'."""
+
+  def fail_unless(test, expected, got):
+    try:
+      assert test
+      print 'PASS'
+
+    except AssertionError:
+      print 'FAIL: Expected %s, got %s' % (expected, got)
+
+  d = Doctor('medical.pl')
+
+  mumps_symptoms = ['fever', 'swollenglands']
+  diagnosis = d.diagnose_one(mumps_symptoms)
+  fail_unless(diagnosis['Diagnosis'] == 'mumps', 'mumps', diagnosis)
+
+  chickenpox_symptoms = ['fever', 'rash', 'bodyache']
+  diagnosis = d.diagnose_one(chickenpox_symptoms)
+  fail_unless(diagnosis['Diagnosis'] == 'chickenpox', 'chickenpox', diagnosis)
 
   adult_symptoms = ['headache', 'sleepiness', 'poorcoordination',
                     'impairedvision', 'nobladdercontrol', 'memoryloss',
                     'difficultywalking']
 
-  d = Doctor('medical.pl')
   diagnosis = d.diagnose_one(adult_symptoms, age_group='adult')
-  assert diagnosis['Diagnosis'] == 'adulthydrocephalus'
+  fail_unless(
+      diagnosis['Diagnosis'] == 'adulthydrocephalus',
+      'adulthydrocephalus',
+      diagnosis)
+
+  child_symptoms = ['sunseteyes', 'seizures', 'sleepiness', 'vomiting',
+                    'largehead', 'softspot', 'poorcoordination',
+                    'impairedvision']
+
+  diagnosis = d.diagnose_one(child_symptoms, age_group='child')
+  fail_unless(
+      diagnosis['Diagnosis'] == 'childhydrocephalus',
+      'childhydrocephalus',
+      diagnosis)
