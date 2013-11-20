@@ -1,0 +1,27 @@
+%html
+  %head
+    %title Prolog Project
+    %script(src="http://html5slides.googlecode.com/svn/trunk/slides.js")
+    %script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+    %script(src="/static/js/bootstrap.min.js")
+    %link(rel="stylesheet", href="/static/css/bootstrap.min.css")
+
+  %body(style="display: none")
+    %section.slides.layout-regular
+      %article  
+        %h1 Group 3 Artificial Intelligence Project
+
+      %form(action="#{}", method="POST")
+      -for question in questions
+        %article
+          .row(style="margin-bottom:3em;")
+            .offset3.span6
+              %h1
+                ${question}
+
+          .row
+            .offset4.span4
+              %label.btn.btn-success.btn-large Yes
+                %input(type="radio", name="#{}")
+              %label.btn.btn-danger.btn-large No
+                %input(type="radio", name="#{}")
