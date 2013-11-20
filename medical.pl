@@ -27,6 +27,10 @@ hypothesis(patient,measles) :-
     symptom(patient,runnynose),
     symptom(patient,rash).
 
+hypothesis(patient,germanmeasles):-
+    symptom(patient,fever), symptom(patient,headache),
+    symptom(patient,runnynose),symptom(patient,rash).
+
 hypothesis(patient,flu) :-
     symptom(patient,fever), symptom(patient,headache),
     symptom(patient,bodyache), symptom(patient,chills),
@@ -38,6 +42,13 @@ hypothesis(patient,commoncold) :-
     symptom(patient,sneezing), symptom(patient,chills),
     symptom(patient,sorethroat).
 
+hypothesis(patient,mumps) :-
+    symptom(patient,fever), symptom(patient,swollenglands).
+
 hypothesis(patient,chikenpox) :-
     symptom(patient,fever), symptom(patient,rash),
     symptom(patient,bodyache).
+
+hypothesis(patient,whooping-cough) :-
+    symptom(patient,runnynose), symptom(patient,sneezing),
+    symptom(patient,cough).
