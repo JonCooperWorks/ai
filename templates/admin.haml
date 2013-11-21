@@ -25,11 +25,14 @@
       };
 
   %body
-    %label(for="disease") Disease
-    %input#disease(type="text", name="disease")
+    .container
+      %h1(style="text-align: center;") Doctor Prolog Admin
+      %div.well(style="text-align: center;")
+        %label(for="disease") Disease
+        %input#disease(type="text", name="disease")
 
-    %label(for="symptoms") Symptoms
-    <!-- HAML was derping -->
-    <textarea id="symptoms" name="symptoms"></textarea>
-
-    %button#submit Add Disease
+        %label(for="symptoms") Symptoms
+        <!-- HAML was derping -->
+        <textarea id="symptoms" name="symptoms" style="width:430px; height:150px;"></textarea>
+        %br
+        %button.btn#submit Add Disease
