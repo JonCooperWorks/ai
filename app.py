@@ -61,7 +61,13 @@ def question():
 @app.route('/question/hypothesis', methods=['POST'])
 def hypothesis():
   symptoms = request.form.getlist('symptoms[]')
-  diagnosis = get_diagnosis(symptoms)
+  diagnosis_list = get_diagnosis(symptoms)
+  try:
+    diagnosis = diagnosis_list[0]
+
+  except IndexError:
+    diagnosis = {'diagnosis': 'notfound'}
+
   return json.dumps(diagnosis)
 
 
