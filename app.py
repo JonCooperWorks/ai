@@ -55,6 +55,15 @@ def question():
   return render_template('question.haml',questions=questions,
                          names=filter(lambda x: not x.startswith('__'), dir(questions)))
 
+@app.route('/question/hypothesis', methods=['GET', 'POST'])
+def hypothesis():
+  if request.method == 'POST':
+    selected = request.form['selected']
+    hypothesis = diagnose_condition(selected)
+
+    return render_template('advice.haml', hypothesis=hypothesis)
+
+
 @app.route('/admin/diseases', methods=['GET', 'POST'])
 def add_disease():
   if request.method == 'POST':

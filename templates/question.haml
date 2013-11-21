@@ -7,48 +7,66 @@
     %script(src="/static/js/question.js")
     %link(rel="stylesheet", href="/static/css/bootstrap.min.css")
 
-  %body(style="display: none")
-    %form.question-form(action="#{}", method="POST")
-      %section.slides.layout-regular
-        %article  
-          %h1 Group 3 Artificial Intelligence Project
+    :javascript
+      window.onload = function () {
+        var selected = new Array();
+        document.getElementById('submit').onclick = function() {
+          $("input:radio:checked").each(function() {
+               selected.push($(this).val());
+          });
+          alert(selected);
 
+          $.post(
+            '/question/hypothesis',
+            selected,
+            function(data, stat, type) {
+              // On success
+              //alert("Disease added");
+            });
+        };
+      };
+
+  %body(style="display: none")
+    %section.slides.layout-regular
+      %article  
+        %h1 Group 3 Artificial Intelligence Project
+
+      %article
+        .row(style="margin-bottom:3em;")
+          .span11(style="margin-top: 200px;")
+            %h3
+              What age group does the patient fall in, an infant, child, adult, or elderly?
+
+        .row
+          .offset1.span2
+            %label.btn.btn-large Infant
+              %input.next(type="radio", name="age_group", value="infant")
+          .span2
+            %label.btn.btn-large Child
+              %input.next(type="radio", name="age_group", value="child")
+          .span2
+            %label.btn.btn-large Adult
+              %input.next(type="radio", name="age_group", value="adult")
+          .span2
+            %label.btn.btn-large Elderly
+              %input.next(type="radio", name="age_group", value="oldadult")
+
+    
+      -for name in names
         %article
           .row(style="margin-bottom:3em;")
-            .span11(style="margin-top: 200px;")
+            .offset1.span9(style="margin-top: 200px;")
               %h3
-                What age group does the patient fall in, an infant, child, adult, or elderly?
+                #{questions[name]}
 
           .row
-            .offset1.span2
-              %label.btn.btn-large Infant
-                %input.next(type="radio", name="age_group", value="infant")
-            .span2
-              %label.btn.btn-large Child
-                %input.next(type="radio", name="age_group", value="child")
-            .span2
-              %label.btn.btn-large Adult
-                %input.next(type="radio", name="age_group", value="adult")
-            .span2
-              %label.btn.btn-large Elderly
-                %input.next(type="radio", name="age_group", value="oldadult")
+            .offset4.span4.next
+              %label.btn.btn-success.btn-large Yes
+                %input.next(type="radio", name="#{name}", value="#{name.lower()}")
+              %label.btn.btn-danger.btn-large No
+                %input.next(type="radio", name="#{name}")
 
-      
-        -for name in names
-          %article
-            .row(style="margin-bottom:3em;")
-              .offset1.span9(style="margin-top: 200px;")
-                %h3
-                  #{questions[name]}
-
-            .row
-              .offset4.span4.next
-                %label.btn.btn-success.btn-large Yes
-                  %input.next(type="radio", name="#{name}", value="#{name.lower()}")
-                %label.btn.btn-danger.btn-large No
-                  %input.next(type="radio", name="#{name}")
-
-        %article
-          .row(style="margin-bottom:3em;")
-            .offset4.span2(style="margin-top: 200px;")  
-              %input.btn.btn-large(type="submit", value="Submit")
+      %article
+        .row(style="margin-bottom:3em;")
+          .offset4.span2(style="margin-top: 200px;")  
+            %button#submit.btn.btn-large Submit
