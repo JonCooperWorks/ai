@@ -1,3 +1,5 @@
+import glob
+
 from pyswip.prolog import Prolog
 
 
@@ -5,7 +7,7 @@ class Doctor(object):
   """A Python adapter to the prolog medical system."""
 
   def __init__(self, prolog_file):
-    self.prolog_file = prolog_file
+    self.prolog_files = glob.glob('*.pl')
 
   def __repr__(self):
     return 'Doctor("%s")' % self.prolog_file
@@ -42,7 +44,9 @@ class Doctor(object):
     for symptom in symptoms:
       self._query_and_log(prolog.assertz, 'symptom(%s,%s)' % (patient, symptom))
 
-    prolog.consult(self.prolog_file)
+    for file in self.prolog_files:
+      prolog.consult(file)
+
     return list(self._query_and_log(prolog.query, 'hypothesis(%s,Diagnosis)' % patient))
 
   def diagnose_one(self, symptoms, age_group=None):
@@ -56,7 +60,7 @@ class Doctor(object):
       return None
 
   def _query_and_log(self, fn, query):
-    with open('patient.pl', 'w') as f:
+    with open('patient.pl', 'a') as f:
       rv = fn(query)
       f.write(query + '\n')
     return rv

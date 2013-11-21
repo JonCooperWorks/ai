@@ -81,5 +81,31 @@ age_group(patient, none).
   return render_template('admin.haml')
 
 
+@app.route('/admin/diseases', methods=['GET', 'POST'])
+def add_disease():
+  if request.method == 'POST':
+    disease_name = request.form['disease']
+    symptoms = request.form.getlist('symptoms[]')
+    filename = '%s.pl' % disease_name
+
+    facts = []
+    for symptom in symptoms:
+      fact = 'symptom(patient, %s).' % symptom
+      facts.append(fact)
+
+    facts = ''.join(facts)
+
+    entry = '''
+hypothesis(patient, {disease}) :-
+age_group(patient, none).
+{facts}
+    '''.format(disease=disease_name, facts=facts)
+
+    with open(filename, 'w') as f:
+      f.write(entry)
+
+  return render_template('admin.haml')
+
+
 if __name__ == '__main__':
   app.run(port=8004, debug=True)
