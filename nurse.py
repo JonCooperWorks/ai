@@ -4,7 +4,19 @@ from pyswip.prolog import Prolog
 
 
 class Nurse(object):
-  """The Nurse."""
+  """The Nurse.
+
+  Returns a list of diseases given a list of symptoms.
+
+  symptoms = ['fever']
+  nurse = Nurse(symptoms.pl)
+  result = nurse.partial_diagnosis(symptoms)
+
+  >>>result
+  ['measles', 'chickenpox', 'flu', 'germanmeasles', 'mumps']
+
+  Repeat results are not shown.
+  """
 
   def __init__(self, prolog_file):
     self.prolog_files = glob.glob('*.pl')
@@ -27,6 +39,8 @@ class Nurse(object):
         differntial_diagnosis.append(result['Illness'])
 
     sick_list = []
+
+    # Removes multiple illnesses from the list
     sick_list = list(set(differntial_diagnosis))
 
     return sick_list
