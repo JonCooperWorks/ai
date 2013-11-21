@@ -22,16 +22,16 @@
           .row
             .offset1.span2
               %label.btn.btn-large Infant
-                %input(type="radio", name="age_group", value="infant")
+                %input.next(type="radio", name="age_group", value="infant")
             .span2
               %label.btn.btn-large Child
-                %input(type="radio", name="age_group", value="child")
+                %input.next(type="radio", name="age_group", value="child")
             .span2
               %label.btn.btn-large Adult
-                %input(type="radio", name="age_group", value="adult")
+                %input.next(type="radio", name="age_group", value="adult")
             .span2
               %label.btn.btn-large Elderly
-                %input(type="radio", name="age_group", value="oldadult")
+                %input.next(type="radio", name="age_group", value="oldadult")
 
       
         -for name in names
@@ -42,11 +42,11 @@
                   #{questions[name]}
 
             .row
-              .offset4.span4
+              .offset4.span4.next
                 %label.btn.btn-success.btn-large Yes
-                  %input(type="radio", name="#{name}", value="#{name.lower()}")
+                  %input.next(type="radio", name="#{name}", value="#{name.lower()}")
                 %label.btn.btn-danger.btn-large No
-                  %input(type="radio", name="#{name}")
+                  %input.next(type="radio", name="#{name}")
 
         %article
           .row(style="margin-bottom:3em;")
