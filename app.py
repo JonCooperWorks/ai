@@ -58,6 +58,12 @@ def question():
                                       dir(questions)))
 
 
+@app.route('/question/hypothesis', methods=['POST'])
+def hypothesis():
+  symptoms = request.form.getlist('symptoms[]')
+  diagnosis = get_diagnosis(symptoms)
+  return json.dumps(diagnosis)
+
 
 @app.route('/admin/diseases', methods=['GET', 'POST'])
 def add_disease():
