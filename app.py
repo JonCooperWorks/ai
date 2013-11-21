@@ -1,3 +1,4 @@
+import json
 import threading
 
 from flask import Flask, render_template, request
@@ -15,14 +16,14 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 diagnosis = None
 
 
-def get_diagnosis(symptoms):
-  t = threading.Thread(target=diagnose_condition, args=(symptoms))
+def get_diagnosis(symptoms, age_group=None):
+  t = threading.Thread(target=diagnose_condition, args=(symptoms, age_group))
   t.start()
   t.join()
   return diagnosis
 
 
-def diagnose_condition(*symptoms):
+def diagnose_condition(symptoms, age_group=None):
   """Prevents the segfault from bringing the entire process down.
 
   This function *MUST* be run in a background thread.
@@ -49,10 +50,14 @@ def diagnose_condition(*symptoms):
 def home():
   return render_template('home.haml')
 
+
 @app.route('/question/')
 def question():
-  return render_template('question.haml',questions=questions,
-                         names=filter(lambda x: not x.startswith('__'), dir(questions)))
+  return render_template('question.haml', questions=questions,
+                         names=filter(lambda x: not x.startswith('__'),
+                                      dir(questions)))
+
+
 
 @app.route('/admin/diseases', methods=['GET', 'POST'])
 def add_disease():
