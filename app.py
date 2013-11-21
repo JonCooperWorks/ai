@@ -1,7 +1,6 @@
 import threading
 
 from flask import Flask, render_template
-
 import questions
 
 
@@ -13,13 +12,7 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 # HACK WARNING:
 # We use this object to talk between the threads and this.
 diagnosis = None
-
-
-def get_diagnosis(symptoms):
-  t = threading.Thread(target=diagnose_condition, args=(symptoms))
-  t.start()
-  t.join()
-  return diagnosis
+lock = object()
 
 
 def diagnose_condition(*symptoms):
@@ -32,12 +25,13 @@ def diagnose_condition(*symptoms):
     symptoms = ['fever', 'swollenglands']
     t = threading.Thread(target=diagnose_condition, args=(symptoms))
     t.start()
-    t.join()
-    print diagnosis
+    wait_for_value(diagnosis)
+    do_other_stuff()
     >>> 'mumps'
   """
 
   global diagnosis
+  diagnosis = lock
   from doctor import Doctor
 
   d = Doctor('medical.pl')
@@ -45,10 +39,20 @@ def diagnose_condition(*symptoms):
   return
 
 
+def wait_for_value(obj):
+  # Busy wait until object is ready.
+  while obj == lock:
+    pass
+
+
 @app.route('/')
 def home():
-  return render_template('home.haml', questions=questions)
+  return render_template('home.haml')
 
+@app.route('/question/')
+def question():
+  return render_template('question.haml',questions=questions,
+                         names=filter(lambda x: not x.startswith('__'), dir(questions)))
 
 if __name__ == '__main__':
   app.run(port=8004, debug=True)
