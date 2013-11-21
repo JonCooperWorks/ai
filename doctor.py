@@ -60,7 +60,7 @@ class Doctor(object):
       return None
 
   def _query_and_log(self, fn, query):
-    with open('patient.pl', 'a') as f:
+    with open('diagnosis.log', 'a') as f:
       rv = fn(query)
       f.write(query + '\n')
     return rv
