@@ -1,0 +1,35 @@
+%html
+  %head
+    %title Doctor Prolog Admin
+    %link(rel="stylesheet", href="/static/css/bootstrap.min.css")
+    %script(src="/static/js/jquery-2.0.3.min.js")
+
+    :javascript
+      window.onload = function () {
+        document.getElementById('submit').onclick = function() {
+          var disease = document.getElementById('disease').value,
+              symptoms = document.getElementById('symptoms').value,
+              request_body = {
+                'disease': disease,
+                'symptoms': symptoms.split(',')
+              };
+
+          $.post(
+            '/admin/diseases',
+            request_body,
+            function(data, stat, type) {
+              // On success
+              alert("Disease added");
+            });
+        };
+      };
+
+  %body
+    %label(for="disease") Disease
+    %input#disease(type="text", name="disease")
+
+    %label(for="symptoms") Symptoms
+    <!-- HAML was derping -->
+    <textarea id="symptoms" name="symptoms"></textarea>
+
+    %button#submit Add Disease
