@@ -2,6 +2,7 @@ import json
 import threading
 
 from flask import Flask, render_template, request
+from flask import redirect, url_for
 
 import questions
 
@@ -48,7 +49,7 @@ def diagnose_condition(symptoms, age_group=None):
 
 @app.route('/')
 def home():
-  return render_template('home.haml')
+  return redirect(url_for('question'))
 
 
 @app.route('/question/')
@@ -61,8 +62,7 @@ def question():
 @app.route('/question/hypothesis', methods=['POST'])
 def hypothesis():
   symptoms = request.form.getlist('symptoms[]')
-  age_group = request.form['age_group']
-  diagnosis_list = get_diagnosis(symptoms, age_group)
+  diagnosis_list = get_diagnosis(symptoms)
   try:
     diagnosis = diagnosis_list[0]
 
