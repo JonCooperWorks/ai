@@ -66,7 +66,7 @@ def hypothesis():
     diagnosis = diagnosis_list[0]
 
   except IndexError:
-    diagnosis = {'diagnosis': 'notfound'}
+    diagnosis = {'Diagnosis': 'notfound'}
 
   return json.dumps(diagnosis)
 
