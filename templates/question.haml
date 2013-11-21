@@ -16,7 +16,7 @@
           });
 
           request_body  = { 
-            'age_group': $('input[name=age_group]').val(),
+            'age_group': selected[0],
             'symptoms': selected.slice(1)
             };
 
@@ -27,7 +27,8 @@
             request_body,
             function(data, stat, type) {
               // On success
-              //alert("Disease added");
+              parsed_data = JSON.parse(data);
+              alert("Diagnosis" + parsed_data['Diagnosis']);
             });
         };
       };

@@ -61,7 +61,8 @@ def question():
 @app.route('/question/hypothesis', methods=['POST'])
 def hypothesis():
   symptoms = request.form.getlist('symptoms[]')
-  diagnosis_list = get_diagnosis(symptoms)
+  age_group = request.form['age_group']
+  diagnosis_list = get_diagnosis(symptoms, age_group)
   try:
     diagnosis = diagnosis_list[0]
 
